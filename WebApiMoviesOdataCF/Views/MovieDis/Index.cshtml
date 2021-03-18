@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Movies</h2>
+
+<h2>These are some recommanded Bollywood Blogbuster Movies</h2>
+<div id="gridProducts" style="margin:20px;background-color:lightgoldenrodyellow;color:darkblue"></div>
+@section scripts {
+    <script type="text/javascript" src="https://jqwidgets.com/jquery-widgets-demo/scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="https://jqwidgets.com/jquery-widgets-demo/jqwidgets/jqx-all.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://jqwidgets.com/jquery-widgets-demo/jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript">$(document).ready(function () {
+            // In this part, you need to prepare your data
+            var source =
+            {
+                datatype: "json",
+                datafields: [
+
+
+                    { name: 'MId', type: 'number' },
+                    { name: 'MName', type: 'string' },
+                    { name: 'StarCast', type: 'string' },
+                    { name: 'Producer', type: 'string' },
+                    { name: 'Director', type: 'string' },
+                    { name: 'ReleaseDate', type: 'date' }
+
+                    ],
+                url: 'https://localhost:44354/odata/Movies'
+        }
+                var dataAdapter = new $.jqx.dataAdapter(source);
+        // displaying data in the grid with jqxGrid
+        $("#gridProducts").jqxGrid(
+            {
+                width: 1000,
+                source: dataAdapter,
+                pageable: true,
+                sortable: true,
+                columns: [
+
+                    { text: 'Movie Id', datafield: 'MId', width: 50 },
+                    { text: 'Movie Name', datafield: 'MName', width: 140 },
+                    { text: 'Star Cast', datafield: 'StarCast', width: 300 },
+                    { text: 'Producer', datafield: 'Producer', width: 200 },
+                    { text: 'Director', datafield: 'Director', width: 150 },
+                    { text: 'Release Date', datafield: 'ReleaseDate', width: 180 }
+
+                ]
+            });
+            });</script>
+}
